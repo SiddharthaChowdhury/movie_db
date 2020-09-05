@@ -80,7 +80,7 @@ const App: React.FC<any> = () => {
 							<div className="app-loading">
 								{state.view === IdAppView.Search 
 									? <>Showing result: {state.results.length}/{state.total}</>
-									: <>Movies in this list: {favCount}</>
+									: <>Movies in watchlist: {favCount}</>
 								}
 								
 							</div>
