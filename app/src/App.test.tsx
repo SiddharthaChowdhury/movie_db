@@ -118,7 +118,6 @@ describe('App movie search test', () => {
 	});
 
 	test('Should trigger API request on search with keyword', () => {
-		// let promise = Promise.resolve()
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [{...utilApp.initialState, searchKey: 'Hobbits'}, mock_Dispatch]); // Adding search key
 
@@ -136,3 +135,39 @@ describe('App movie search test', () => {
 		expect(mock_getMovies).toHaveBeenCalledWith('Hobbits', utilApp.initialState.total, mock_Dispatch);
 	});
 })
+
+describe('App setting watch later btn test', () => {
+	beforeEach(function () {
+	})
+	afterEach(() => {
+		jest.clearAllMocks();
+	})
+
+	test('Should trigger API request on search with keyword', () => {
+		const mock_Dispatch = jest.fn();
+		React.useReducer = jest.fn(() => [{...utilApp.initialState, searchKey: 'Hobbits', results: mockMovies, total: 1}, mock_Dispatch]); // Adding search key
+
+		const wrapper = setupMount({component: App});
+		const setFavBtn = getElementByTestAttr(wrapper, 'app-result-movies-setfav');
+
+		expect(setFavBtn.length).toBe(1);
+
+		setFavBtn.simulate('click', mockMovies[0]);
+
+		expect(mock_Dispatch).toHaveBeenCalledTimes(1);
+		expect(mock_Dispatch).toHaveBeenCalledWith({type: TypeActionApp.SetFav, payload: mockMovies[0]});
+	});
+
+})
+
+const mockMovies = [
+    {
+        "poster": "https://image.tmdb.org/t/p/w200/poster.jpg",
+        "id": 150584,
+        "overview": "In an age long ago...",
+        "title": "Clash of the Empires",
+        "release_date": "2012-11-13",
+        "vote_count": 22,
+        "vote_average": 2.5
+    }
+];

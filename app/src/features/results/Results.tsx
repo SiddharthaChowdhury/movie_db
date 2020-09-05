@@ -21,7 +21,7 @@ export const Results: React.FC<SearchProps> = ({results, onWatchLater, favList, 
     }
 
     return (
-        <Grid item={true} className={'movieList'}>
+        <Grid item={true} className={'movieList'} data-test={'app-result-movies'}>
             {filteredResults.map((result: IMovieInfo, _key: number) => {
                 return (
                     <div className={`movieList__item ${_key % 2 === 0 ? 'odd-Item': ''}`} key={result.id}>
@@ -37,7 +37,7 @@ export const Results: React.FC<SearchProps> = ({results, onWatchLater, favList, 
                                     <span>{result.title}</span>
                                     <span>({new Date(result.release_date).getFullYear()})</span>
                                 </label>
-                                <span onClick={() => onWatchLater(result)}>{favList[result.id] ? <WatchLater /> : <WatchLaterOutlined/>}</span>
+                                <span data-test={'app-result-movies-setfav'} onClick={() => onWatchLater(result)}>{favList[result.id] ? <WatchLater /> : <WatchLaterOutlined/>}</span>
                             </div>
                             <div className={'result-overview'}>
                                 { result.overview.length < 350 ? result.overview : result.overview.substring(0, 350) + '..'}
