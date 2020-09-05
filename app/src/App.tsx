@@ -12,6 +12,7 @@ const App: React.FC<any> = () => {
 	const fetchMovies = async () => {
 		dispatch({type: TypeActionApp.SetView, payload: IdAppView.Search})
 		if(!state.searchKey) {
+			dispatch({type: TypeActionApp.SetMovies, payload: {results: [], total: 0}})
 			return;
 		}
 

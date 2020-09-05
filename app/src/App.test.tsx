@@ -112,7 +112,9 @@ describe('App movie search test', () => {
 		searchBtn.simulate('click')
 
 		expect(mock_getMovies).toHaveBeenCalledTimes(0); // because empty keyword
+		expect(mock_Dispatch).toHaveBeenCalledTimes(2);
 		expect(mock_Dispatch).toHaveBeenCalledWith({type: TypeActionApp.SetView, payload: IdAppView.Search})
+		expect(mock_Dispatch).toHaveBeenCalledWith({type: TypeActionApp.SetMovies, payload: {results: [], total: 0}})
 	});
 
 	test('Should trigger API request on search with keyword', () => {
