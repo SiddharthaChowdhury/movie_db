@@ -4,5 +4,6 @@ export interface IMovieInfo {
     title: string;
     overview: string;
     release_date: string;
-    isUserFav: boolean;
+    vote_average: number;
+    vote_count: number;
 }

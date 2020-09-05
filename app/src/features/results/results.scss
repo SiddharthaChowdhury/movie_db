@@ -4,9 +4,7 @@
         display: flex;
         min-height: 150px;
         width: 100%;
-        border: 1px solid silver;
-        margin-bottom: 10px;
-        padding: 5px;
+        padding: 14px;;
         box-sizing: border-box;
         border-radius: 3px;
         background-color: #ffffff;
@@ -23,6 +21,10 @@
             width: 100%;
             padding-left: 10px;
             box-sizing: border-box;
+        }
+
+        &.odd-Item {
+            background-color: #f6f6f5;
         }
     }
 }
@@ -52,6 +54,32 @@
 }
 
 .result-overview {
-    min-height: 100px;
-    font-size: 15px;
+    min-height: 90px;
+    font-size: 13px;
+}
+
+.result-meta {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+
+    > span {
+        margin: 0 5px;
+        color: #989595;
+    }
+
+    &__metric {
+        display: flex;
+        align-items: center;
+
+        > svg {
+            color: #f5b500;
+            width: 20px;
+        }
+
+        > label {
+            color: #989595;
+            margin-right: 3px;
+        }
+    }
 }

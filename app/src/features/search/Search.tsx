@@ -11,7 +11,7 @@ interface SearchProps {
 export const Search: React.FC<SearchProps> = ({value, onChange, onSearch}) => {
     return (
         <Grid item={true} className={'searchContainer'}>
-            <input type={'search'} value={value} onChange={e => onChange(e.target.value)} />
+            <input placeholder={'Movie in your mind'} type={'search'} value={value} onChange={e => onChange(e.target.value)} />
             <button onClick={onSearch}>Search</button>
         </Grid>
     );

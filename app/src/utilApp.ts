@@ -20,7 +20,7 @@ export enum IdAppView {
 export interface IAppReducer {
     searchKey: string;
     results: IMovieInfo[];
-    fav: IMovieInfo[];
+    fav: {[id: string]: IMovieInfo};
     total: number;
     isLoading?: boolean;
     view: IdAppView
@@ -30,7 +30,7 @@ export const initialState: IAppReducer = {
     searchKey: '',
     total: 0,
     results: [],
-    fav: [],
+    fav: {},
     view: IdAppView.Search
 }
 
@@ -43,10 +43,23 @@ export const appReducer = (state: IAppReducer = initialState, action: IActionSea
                 total: action.payload.total
             };
         case TypeActionApp.SetFav:
-            return {
-                ...state,
-                fav: action.payload
-            };
+            if (state.fav[action.payload.id]) {
+                const update = {...state.fav}
+                delete update[action.payload.id];
+
+                return {
+                    ...state,
+                    fav: {...update}
+                }
+            } else {
+                return {
+                    ...state,
+                    fav: {
+                        ...state.fav,
+                        [action.payload.id]: action.payload
+                    }
+                }
+            }
         case TypeActionApp.SetView:
             return {
                 ...state,
