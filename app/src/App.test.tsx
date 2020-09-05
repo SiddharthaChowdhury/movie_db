@@ -1,39 +1,14 @@
 import React from 'react';
 import App from './App';
-import { ShallowWrapper, shallow, ReactWrapper, mount } from 'enzyme';
+import { ShallowWrapper} from 'enzyme';
 import { utilApp, TypeActionApp, IdAppView } from './utilApp';
-
-export interface ISetupConf {
-	component: any;
-	props: any;
-}
-export const setupShallow = (config: any):ShallowWrapper => {
-	const {component: Component, props = {}} = config;
-
-	const wrapper = shallow(
-		<Component {...props} />
-	);
-	return wrapper;
-}
-
-	export const setupMount = (config: any):ReactWrapper => {
-	const {component: Component, props = {}} = config;
-
-	const wrapper = mount(
-		<Component {...props} />
-	);
-	return wrapper;
-}
-
-export const getElementByTestAttr = (wrapper: any, val: string) => {
-  	return wrapper.find(`[data-test='${val}']`);
-}
+import { setupShallow, getElementByTestAttr, setupMount } from './test/utilTest';
 
 describe('App component test', () => {
 	let wrapper: ShallowWrapper;
 
 	beforeEach(() => {
-		wrapper = setupShallow({component: App});
+		wrapper = setupShallow({component: App, props: {}});
 	})
 
   	test('Should load component successfully', () => {
@@ -62,7 +37,7 @@ describe('App state test using useReducer', () => {
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [utilApp.initialState, mock_Dispatch]);
 
-		const wrapper = setupMount({component: App});
+		const wrapper = setupMount({component: App, props: {}});
 		const appFavBtn = getElementByTestAttr(wrapper, 'app-fav-btn');
 		const appSearchBtn = getElementByTestAttr(wrapper, 'app-search-btn');
 
@@ -87,7 +62,7 @@ describe('App movie search test', () => {
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [utilApp.initialState, mock_Dispatch]);
 
-		const wrapper = setupMount({component: App});
+		const wrapper = setupMount({component: App, props: {}});
 		const searchInput = getElementByTestAttr(wrapper, 'search-container').find('input');
 		const mockEvent = {target: {value: 'Hobbits'}};
 
@@ -101,7 +76,7 @@ describe('App movie search test', () => {
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [utilApp.initialState, mock_Dispatch]);
 
-		const wrapper = setupMount({component: App});
+		const wrapper = setupMount({component: App, props: {}});
 		const searchBtn = getElementByTestAttr(wrapper, 'search-container').find('button');
 
 		expect(searchBtn.length).toBe(1);
@@ -121,7 +96,7 @@ describe('App movie search test', () => {
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [{...utilApp.initialState, searchKey: 'Hobbits'}, mock_Dispatch]); // Adding search key
 
-		const wrapper = setupMount({component: App});
+		const wrapper = setupMount({component: App, props: {}});
 		const searchBtn = getElementByTestAttr(wrapper, 'search-container').find('button');
 
 		expect(searchBtn.length).toBe(1);
@@ -147,7 +122,7 @@ describe('App setting watch later btn test', () => {
 		const mock_Dispatch = jest.fn();
 		React.useReducer = jest.fn(() => [{...utilApp.initialState, searchKey: 'Hobbits', results: mockMovies, total: 1}, mock_Dispatch]); // Adding search key
 
-		const wrapper = setupMount({component: App});
+		const wrapper = setupMount({component: App, props: {}});
 		const setFavBtn = getElementByTestAttr(wrapper, 'app-result-movies-setfav');
 
 		expect(setFavBtn.length).toBe(1);
@@ -157,7 +132,6 @@ describe('App setting watch later btn test', () => {
 		expect(mock_Dispatch).toHaveBeenCalledTimes(1);
 		expect(mock_Dispatch).toHaveBeenCalledWith({type: TypeActionApp.SetFav, payload: mockMovies[0]});
 	});
-
 })
 
 const mockMovies = [

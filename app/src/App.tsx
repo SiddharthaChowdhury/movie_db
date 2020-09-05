@@ -45,7 +45,7 @@ const App: React.FC<any> = () => {
 				</div>
 				<Search 
 					value={state.searchKey} 
-					onChange={(value: string) => dispatch({type: TypeActionApp.SetSearch, payload: value})}
+					onChangeText={(value: string) => dispatch({type: TypeActionApp.SetSearch, payload: value})}
 					onSearch={fetchMovies}
 				/>
 				{(state.isLoading)
