@@ -1,4 +1,46 @@
-.mainContainer {
-  background-color: rgb(231, 191, 191);
-  margin: 0 auto;
+.app {
+  background-color: #e3e2dd;
+  height: 100vh;
+  overflow-y: scroll;
+
+  .mainContainer {
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f1f1ee;
+
+    &__topbar{
+      display: flex;
+
+      :nth-child(2) {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+
+        button {
+          padding: 10px;
+          margin-left: 5px;
+          cursor: pointer;
+          border: none;
+          outline: none;
+
+          &.active {
+            border: 1px solid silver;
+            border-radius: 3px;
+          }
+
+          :hover {
+            background-color: #e3e2dd;;
+          }
+        }
+      }
+    }
+    
+  
+    .app-loading {
+      padding: 10px 0;
+      font-style: italic;
+      font-size: 13px;
+    }
+  }
 }

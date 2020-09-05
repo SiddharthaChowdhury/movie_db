@@ -3,7 +3,9 @@ import { IMovieInfo } from "./features/IMovieInfo";
 export enum TypeActionApp {
     SetMovies = "Set > Movies",
     SetFav = "Set > Fav",
-    SetSearch = "Set > Search"
+    SetSearch = "Set > Search",
+    SetView = "Set > View",
+    Loading = "Loading > Search"
 }
 
 export interface IActionSearch {
@@ -11,18 +13,25 @@ export interface IActionSearch {
     payload: any;
 }
 
+export enum IdAppView {
+    Search,
+    Favourite
+}
 export interface IAppReducer {
     searchKey: string;
     results: IMovieInfo[];
     fav: IMovieInfo[];
     total: number;
+    isLoading?: boolean;
+    view: IdAppView
 }
 
 export const initialState: IAppReducer = {
     searchKey: '',
     total: 0,
     results: [],
-    fav: []
+    fav: [],
+    view: IdAppView.Search
 }
 
 export const appReducer = (state: IAppReducer = initialState, action: IActionSearch): IAppReducer => {
@@ -37,6 +46,16 @@ export const appReducer = (state: IAppReducer = initialState, action: IActionSea
             return {
                 ...state,
                 fav: action.payload
+            };
+        case TypeActionApp.SetView:
+            return {
+                ...state,
+                view: action.payload
+            };
+        case TypeActionApp.Loading:
+            return {
+                ...state,
+                isLoading: action.payload
             };
         case TypeActionApp.SetSearch:
             return {

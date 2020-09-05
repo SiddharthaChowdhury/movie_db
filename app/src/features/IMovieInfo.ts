@@ -1,5 +1,5 @@
 export interface IMovieInfo {
-    poster: string;
+    poster: string | null;
     id: number;
     title: string;
     overview: string;
