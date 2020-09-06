@@ -32,10 +32,10 @@ const App: React.FC<any> = () => {
 						<p>Search movies for free</p>
 					</div>
 					<div>
-						<button data-test={'app-search-btn'} className={state.view === IdAppView.Search ? 'active': ''} onClick={() => dispatch({type: TypeActionApp.SetView, payload: IdAppView.Search})}>
+						<button title={'Search movies'} data-test={'app-search-btn'} className={state.view === IdAppView.Search ? 'active': ''} onClick={() => dispatch({type: TypeActionApp.SetView, payload: IdAppView.Search})}>
 							Search
 						</button>
-						<button data-test={'app-fav-btn'} className={state.view === IdAppView.Favourite ? 'active': ''} onClick={() => dispatch({type: TypeActionApp.SetView, payload: IdAppView.Favourite})}>
+						<button title={'Watch later'} data-test={'app-fav-btn'} className={state.view === IdAppView.Favourite ? 'active': ''} onClick={() => dispatch({type: TypeActionApp.SetView, payload: IdAppView.Favourite})}>
 							<WatchLaterOutlined/>
 							{( favCount > 0) && 
 								<div className={'favCount'}>{favCount}</div>
